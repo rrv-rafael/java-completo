@@ -11,15 +11,15 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
 
-        Produto produto = new Produto();
-
         System.out.println("Digite os dados do produto:");
         System.out.print("Nome: ");
-        produto.setNome(scan.nextLine());
+        String nome = scan.nextLine();
         System.out.print("Preço: ");
-        produto.setPreco(scan.nextDouble());
+        double preco = scan.nextDouble();
         System.out.print("Quantidade: ");
-        produto.setQuantidade(scan.nextInt());
+        int quantidade = scan.nextInt();
+
+        Produto produto = new Produto(nome, preco, quantidade);
 
         System.out.println("Dados do Produto: " + produto);
 
