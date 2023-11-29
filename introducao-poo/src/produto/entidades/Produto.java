@@ -31,7 +31,7 @@ public class Produto {
     }
 
     public double valorTotalEstoque() {
-        return this.preco * this.quantidade;
+        return preco * quantidade;
     }
 
     public void adicionarProduto(int quantidade) {
