@@ -16,10 +16,8 @@ public class Main {
         String nome = scan.nextLine();
         System.out.print("Preço: ");
         double preco = scan.nextDouble();
-        System.out.print("Quantidade: ");
-        int quantidade = scan.nextInt();
 
-        Produto produto = new Produto(nome, preco, quantidade);
+        Produto produto = new Produto(nome, preco);
 
         System.out.println("Dados do Produto: " + produto);
 
