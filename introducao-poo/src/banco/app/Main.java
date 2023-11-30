@@ -17,18 +17,18 @@ public class Main {
         String numeroConta = scan.next();
         scan.nextLine();
         System.out.print("Informe o seu nome: ");
-        String nome = scan.nextLine();
+        String nomeTitular = scan.nextLine();
 
         System.out.print("Deseja realizar um depósito inicial (s/n)? ");
         char decisao = scan.next().charAt(0);
 
         if (decisao == 'S' || decisao == 's') {
             System.out.print("Informe o valor do depósito: ");
-            double valorDeposito = scan.nextDouble();
+            double depositoInicial = scan.nextDouble();
 
-            conta = new ContaBancaria(numeroConta, nome, valorDeposito);
+            conta = new ContaBancaria(numeroConta, nomeTitular, depositoInicial);
         } else {
-            conta = new ContaBancaria(numeroConta, nome);
+            conta = new ContaBancaria(numeroConta, nomeTitular);
         }
 
         System.out.println("Conta bancária, criada com sucesso!" + conta);
