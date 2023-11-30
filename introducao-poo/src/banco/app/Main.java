@@ -10,6 +10,7 @@ public class Main {
         Locale.setDefault(Locale.US);
 
         Scanner scan = new Scanner(System.in);
+
         ContaBancaria conta;
 
         System.out.print("Informe o número da conta: ");
@@ -18,7 +19,7 @@ public class Main {
         System.out.print("Informe o seu nome: ");
         String nome = scan.nextLine();
 
-        System.out.print("Deseja realizar um depósito na criação da conta (S/N)? ");
+        System.out.print("Deseja realizar um depósito inicial (s/n)? ");
         char decisao = scan.next().charAt(0);
 
         if (decisao == 'S' || decisao == 's') {
