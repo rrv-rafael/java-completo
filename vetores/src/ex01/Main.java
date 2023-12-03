@@ -1,4 +1,4 @@
-package ex01.app;
+package ex01;
 
 import java.util.Scanner;
 
