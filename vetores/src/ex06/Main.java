@@ -1,6 +1,5 @@
 package ex06;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
