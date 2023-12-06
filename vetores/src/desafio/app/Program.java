@@ -35,5 +35,7 @@ public class Program {
         for (Aluguel a : aluguel) {
             System.out.println(a);
         }
+
+        scan.close();
     }
 }
