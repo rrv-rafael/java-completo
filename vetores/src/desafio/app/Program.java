@@ -21,7 +21,7 @@ public class Program {
             System.out.print("Nome: ");
             String nome = scan.nextLine();
             System.out.print("E-mail: ");
-            String email = scan.nextLine();
+            String email = scan.next();
             System.out.print("Número do quarto: ");
             int numeroQuarto = scan.nextInt();
 
