@@ -63,5 +63,7 @@ public class App {
 
         System.out.println(funcionario);
         System.out.printf("Rendimentos referente à %s: %.2f", dataInformada, rendimentos);
+
+        scan.close();
     }
 }
