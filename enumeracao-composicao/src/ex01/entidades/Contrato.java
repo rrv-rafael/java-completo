@@ -1,26 +1,27 @@
 package ex01.entidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Contrato {
-    private Date dataContrato;
+    private LocalDate dataContrato;
     private Double valorPorHora;
     private Integer horas;
 
     public Contrato() {
     }
 
-    public Contrato(Date dataContrato, Double valorPorHora, Integer horas) {
+    public Contrato(LocalDate dataContrato, Double valorPorHora, Integer horas) {
         this.dataContrato = dataContrato;
         this.valorPorHora = valorPorHora;
         this.horas = horas;
     }
 
-    public Date getDataContrato() {
+    public LocalDate getDataContrato() {
         return dataContrato;
     }
 
-    public void setDataContrato(Date dataContrato) {
+    public void setDataContrato(LocalDate dataContrato) {
         this.dataContrato = dataContrato;
     }
 
@@ -38,5 +39,9 @@ public class Contrato {
 
     public void setHoras(Integer horas) {
         this.horas = horas;
+    }
+
+    public Double valorTotal() {
+        return 0.0;
     }
 }

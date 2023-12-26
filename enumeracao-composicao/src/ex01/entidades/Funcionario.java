@@ -2,10 +2,14 @@ package ex01.entidades;
 
 import ex01.entidades.enums.NivelFuncionario;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Funcionario {
     private String nome;
     private NivelFuncionario nivel;
     private Double salarioBase;
+    private List<Contrato> contrato;
 
     public Funcionario() {
     }
@@ -14,6 +18,7 @@ public class Funcionario {
         this.nome = nome;
         this.nivel = nivel;
         this.salarioBase = salarioBase;
+        this.contrato = new ArrayList<>();
     }
 
     public String getNome() {
@@ -41,14 +46,22 @@ public class Funcionario {
     }
 
     public void addContrato(Contrato contrato) {
-
+        this.contrato.add(contrato);
     }
 
     public void removerContrato(Contrato contrato) {
 
     }
 
-    public Double receita(Integer ano, Integer mes) {
-        return 0.0;
+    public Double rendimento(Integer ano, Integer mes) {
+        double rendimentos = 0;
+
+        for (Contrato c : contrato) {
+            if (c.getDataContrato().getMonthValue() == mes && c.getDataContrato().getYear() == ano) {
+                rendimentos += c.getHoras() * c.getValorPorHora();
+            }
+        }
+
+        return rendimentos + salarioBase;
     }
 }
