@@ -33,7 +33,7 @@ public class App {
         System.out.print("\nQuantos contratos para este funcionário: ");
         int qtdContrato = scan.nextInt();
 
-        Funcionario funcionario = new Funcionario(nome, nivelFuncionario, salarioBase);
+        Funcionario funcionario = new Funcionario(nome, nivelFuncionario, salarioBase, departamento);
 
         for (int i = 0; i < qtdContrato; i++) {
             System.out.printf("\nInforme os dados do contrato #%d:\n", i + 1);
@@ -61,8 +61,7 @@ public class App {
 
         Double rendimentos = funcionario.rendimento(ano, mes);
 
-        System.out.printf("Nome: %s", funcionario.getNome());
-        System.out.printf("\nDepartamento: %s", departamento.getNome());
-        System.out.printf("\nRendimentos referente à %s: %.2f", dataInformada, rendimentos);
+        System.out.println(funcionario);
+        System.out.printf("Rendimentos referente à %s: %.2f", dataInformada, rendimentos);
     }
 }

@@ -9,16 +9,18 @@ public class Funcionario {
     private String nome;
     private NivelFuncionario nivel;
     private Double salarioBase;
-    private List<Contrato> contrato;
+    private Departamento departamento;
+    private List<Contrato> contratos;
 
     public Funcionario() {
     }
 
-    public Funcionario(String nome, NivelFuncionario nivel, Double salarioBase) {
+    public Funcionario(String nome, NivelFuncionario nivel, Double salarioBase, Departamento departamento) {
         this.nome = nome;
         this.nivel = nivel;
         this.salarioBase = salarioBase;
-        this.contrato = new ArrayList<>();
+        this.departamento = departamento;
+        this.contratos = new ArrayList<>();
     }
 
     public String getNome() {
@@ -45,23 +47,32 @@ public class Funcionario {
         this.salarioBase = salarioBase;
     }
 
+    public List<Contrato> getContratos() {
+        return contratos;
+    }
+
     public void addContrato(Contrato contrato) {
-        this.contrato.add(contrato);
+        this.contratos.add(contrato);
     }
 
     public void removerContrato(Contrato contrato) {
-
+        this.contratos.remove(contrato);
     }
 
     public Double rendimento(Integer ano, Integer mes) {
-        double rendimentos = 0;
+        double rendimentos = salarioBase;
 
-        for (Contrato c : contrato) {
+        for (Contrato c : contratos) {
             if (c.getDataContrato().getMonthValue() == mes && c.getDataContrato().getYear() == ano) {
-                rendimentos += c.getHoras() * c.getValorPorHora();
+                rendimentos += c.valorTotal();
             }
         }
 
-        return rendimentos + salarioBase;
+        return rendimentos;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + "\nDepartamento: " + departamento.getNome();
     }
 }
