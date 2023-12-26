@@ -66,7 +66,3 @@ public class App {
         System.out.printf("\nRendimentos referente à %s: %.2f", dataInformada, rendimentos);
     }
 }
-
-//800
-//540
-//1000
