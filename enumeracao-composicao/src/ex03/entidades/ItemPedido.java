@@ -2,15 +2,13 @@ package ex03.entidades;
 
 public class ItemPedido {
     private Integer quantidade;
-    private Double preco;
     private Produto produto;
 
     public ItemPedido() {
     }
 
-    public ItemPedido(Integer quantidade, Double preco, Produto produto) {
+    public ItemPedido(Integer quantidade, Produto produto) {
         this.quantidade = quantidade;
-        this.preco = preco;
         this.produto = produto;
     }
 
@@ -22,14 +20,6 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
     public Produto getProduto() {
         return produto;
     }
@@ -39,6 +29,11 @@ public class ItemPedido {
     }
 
     public Double subTotal() {
-        return quantidade * preco;
+        return quantidade * produto.getPreco();
+    }
+
+    @Override
+    public String toString() {
+        return produto.getNome() + ", $" + String.format("%.2f", produto.getPreco()) + ", Quantidade: " + quantidade + ", Subtotal: $" + String.format("%.2f", subTotal());
     }
 }

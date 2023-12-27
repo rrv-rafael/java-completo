@@ -41,4 +41,9 @@ public class Cliente {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    @Override
+    public String toString() {
+        return nome + " (" + dataNascimento.format(FORMATTER) + ") - " + email;
+    }
 }
