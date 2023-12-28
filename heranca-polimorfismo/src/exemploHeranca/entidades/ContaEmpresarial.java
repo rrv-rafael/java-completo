@@ -24,4 +24,10 @@ public class ContaEmpresarial extends Conta {
             saldo += valorEmprestimo - 10;
         }
     }
+
+    @Override
+    public void realizarSaque(double valorSaque) {
+        super.realizarSaque(valorSaque);
+        saldo -= 2;
+    }
 }

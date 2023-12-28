@@ -6,31 +6,19 @@ import exemploHeranca.entidades.ContaPoupanca;
 
 public class App {
     public static void main(String[] args) {
-        Conta conta = new Conta(1001, "Alex", 0.0);
+        Conta conta = new Conta(1001, "Alex", 1000.0);
+        conta.realizarSaque(200.0);
 
-        ContaEmpresarial contaEmpresarial = new ContaEmpresarial(1002, "Maria", 0.0, 500.0);
+        System.out.println(conta.getSaldo());
 
-        // UPCASTING:
-        Conta conta1 = contaEmpresarial;
-        Conta conta2 = new ContaEmpresarial(1003, "Bob", 0.0, 200.0);
-        Conta conta3 = new ContaPoupanca(1004, "Ana", 0.0, 0.01);
+        Conta contaPoupanca = new ContaPoupanca(1002, "Maria", 1000.0, 0.01);
+        contaPoupanca.realizarSaque(200.0);
 
-        // DOWNCASTING
-        ContaEmpresarial conta4 = (ContaEmpresarial) conta2;
-        conta4.emprestimo(100.0);
+        System.out.println(contaPoupanca.getSaldo());
 
-        //ContaEmpresarial conta5 = (ContaEmpresarial) conta3;
+        Conta contaEmpresarial = new ContaEmpresarial(1003, "Bob", 1000.0, 500.0);
+        contaEmpresarial.realizarSaque(200.0);
 
-        if (conta3 instanceof ContaEmpresarial) {
-            ContaEmpresarial conta5 = (ContaEmpresarial) conta3;
-            conta5.emprestimo(200.0);
-            System.out.println("Emprestado.");
-        }
-
-        if (conta3 instanceof ContaPoupanca) {
-            ContaPoupanca conta5 = (ContaPoupanca) conta3;
-            conta5.atualizarSaldo();
-            System.out.println("Atualizado.");
-        }
+        System.out.println(contaEmpresarial.getSaldo());
     }
 }
