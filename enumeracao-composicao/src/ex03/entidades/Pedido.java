@@ -11,7 +11,7 @@ public class Pedido {
     private LocalDateTime dataPedido;
     private StatusPedido statusPedido;
     private Cliente cliente;
-    private List<ItemPedido> itemPedidos;
+    private List<ItemPedido> itemsPedido;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     public Pedido() {
@@ -21,7 +21,7 @@ public class Pedido {
         this.dataPedido = dataPedido;
         this.statusPedido = statusPedido;
         this.cliente = cliente;
-        this.itemPedidos = new ArrayList<>();
+        this.itemsPedido = new ArrayList<>();
     }
 
     public LocalDateTime getDataPedido() {
@@ -48,22 +48,18 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public List<ItemPedido> getItemPedidos() {
-        return itemPedidos;
-    }
-
     public void addItemPedido(ItemPedido itemPedido) {
-        this.itemPedidos.add(itemPedido);
+        itemsPedido.add(itemPedido);
     }
 
     public void removerItemPedido(ItemPedido itemPedido) {
-        this.itemPedidos.remove(itemPedido);
+        itemsPedido.remove(itemPedido);
     }
 
-    public Double total() {
+    public double total() {
         double soma = 0;
 
-        for (ItemPedido i : itemPedidos) {
+        for (ItemPedido i : itemsPedido) {
             soma += i.subTotal();
         }
 
@@ -74,13 +70,15 @@ public class Pedido {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Data do pedido: ").append(dataPedido.format(FORMATTER))
+        sb.append("\nRESUMO DO PEDIDO:\n").append("Data do pedido: ").append(dataPedido.format(FORMATTER))
                 .append("\nStatus do pedido: ").append(statusPedido)
                 .append("\nCliente: ").append(cliente).append("\nItems do pedido:\n");
 
-        for (ItemPedido i : itemPedidos) {
+        for (ItemPedido i : itemsPedido) {
             sb.append(i).append("\n");
         }
+
+        sb.append("Preço total: $").append(String.format("%.2f", total()));
 
         return sb.toString();
     }

@@ -31,13 +31,13 @@ public class App {
 
         System.out.println("Informe os dados do pedido:");
         System.out.print("Status: ");
-        String status = scan.nextLine();
+        StatusPedido status = StatusPedido.valueOf(scan.next());
         System.out.print("Quantos items neste pedido? ");
         int qtdItemsPedido = scan.nextInt();
 
         LocalDateTime dataPedido = LocalDateTime.now();
 
-        Pedido pedido = new Pedido(dataPedido, StatusPedido.valueOf(status), cliente);
+        Pedido pedido = new Pedido(dataPedido, status, cliente);
 
         for (int i = 0; i < qtdItemsPedido; i++) {
             System.out.printf("Informe os dados do item #%d:\n", i + 1);
@@ -51,13 +51,13 @@ public class App {
 
             Produto produto = new Produto(nomeProduto, precoProduto);
 
-            ItemPedido itemPedido = new ItemPedido(qtd, produto);
+            ItemPedido itemPedido = new ItemPedido(qtd, precoProduto, produto);
 
             pedido.addItemPedido(itemPedido);
         }
 
-        System.out.println("\nRESUMO DO PEDIDO:");
         System.out.print(pedido);
-        System.out.printf("Preço total: $%.2f", pedido.total());
+
+        scan.close();
     }
 }
