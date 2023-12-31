@@ -27,7 +27,7 @@ public class App {
             System.out.print("Retângulo ou circulo (r/c)? ");
             char tipoForma = scan.next().charAt(0);
             System.out.print("Cor (BLACK/BLUE/RED): ");
-            String cor = scan.next();
+            Cor cor = Cor.valueOf(scan.next());
 
             if (tipoForma == 'r' || tipoForma == 'R') {
                 System.out.print("Largura: ");
@@ -35,12 +35,12 @@ public class App {
                 System.out.print("Altura: ");
                 double altura = scan.nextDouble();
 
-                formas.add(new Retangulo(Cor.valueOf(cor), largura, altura));
+                formas.add(new Retangulo(cor, largura, altura));
             } else {
                 System.out.print("Raio: ");
                 double raio = scan.nextDouble();
 
-                formas.add(new Circulo(Cor.valueOf(cor), raio));
+                formas.add(new Circulo(cor, raio));
             }
 
         }
