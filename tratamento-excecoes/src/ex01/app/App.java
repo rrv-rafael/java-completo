@@ -3,49 +3,38 @@ package ex01.app;
 import ex01.model.entidades.Reserva;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
-    public static Scanner scan = new Scanner(System.in);
+    private static final Scanner SCAN = new Scanner(System.in);
+    private static LocalDate dataEntrada, dataSaida;
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
 
         System.out.print("Número do quarto: ");
-        int numeroQuarto = scan.nextInt();
+        int numeroQuarto = SCAN.nextInt();
 
-        List<LocalDate> datas = lerData();
+        lerData();
 
-        Reserva reserva = new Reserva(numeroQuarto, datas.getFirst(), datas.getLast());
+        Reserva reserva = new Reserva(numeroQuarto, dataEntrada, dataSaida);
 
         System.out.println(reserva);
 
         System.out.println("\nEntre com a data para atualizar sua reserva:");
 
-        datas = lerData();
+        lerData();
 
-        reserva.atualizarData(datas.getFirst(), datas.getLast());
+        reserva.atualizarData(dataEntrada, dataSaida);
         System.out.println(reserva);
 
-        scan.close();
+        SCAN.close();
     }
 
-    public static List<LocalDate> lerData() {
+    private static void lerData() {
         System.out.print("Data de entrada (dd/MM/yyyy): ");
-        String dataEntradaInformada = scan.next();
+        dataEntrada = LocalDate.parse(SCAN.next(), Reserva.FORMATTER);
         System.out.print("Data de saída (dd/MM/yyyy): ");
-        String dataSaidaInformada = scan.next();
-
-        LocalDate dataEntrada = LocalDate.parse(dataEntradaInformada, Reserva.FORMATTER);
-        LocalDate dataSaida = LocalDate.parse(dataSaidaInformada, Reserva.FORMATTER);
-
-        List<LocalDate> datas = new ArrayList<>();
-
-        datas.add(dataEntrada);
-        datas.add(dataSaida);
-
-        return datas;
+        dataSaida = LocalDate.parse(SCAN.next(), Reserva.FORMATTER);
     }
 }
