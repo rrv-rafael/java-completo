@@ -1,8 +1,12 @@
 package ex01.app;
 
 import ex01.model.entidades.Reserva;
+import ex01.model.excecoes.DominioExcecao;
 
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -12,21 +16,32 @@ public class App {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
 
-        System.out.print("Número do quarto: ");
-        int numeroQuarto = SCAN.nextInt();
+        try {
+            System.out.print("Número do quarto: ");
+            int numeroQuarto = SCAN.nextInt();
 
-        lerData();
+            lerData();
 
-        Reserva reserva = new Reserva(numeroQuarto, dataEntrada, dataSaida);
+            Reserva reserva = new Reserva(numeroQuarto, dataEntrada, dataSaida);
 
-        System.out.println(reserva);
+            System.out.println(reserva);
 
-        System.out.println("\nEntre com a data para atualizar sua reserva:");
+            System.out.println("\nEntre com as datas para atualizar sua reserva:");
 
-        lerData();
+            lerData();
 
-        reserva.atualizarData(dataEntrada, dataSaida);
-        System.out.println(reserva);
+            reserva.atualizarData(dataEntrada, dataSaida);
+
+            System.out.println(reserva);
+        } catch (DateTimeParseException e) {
+            System.out.println("Formato de data inválido.");
+        } catch (DominioExcecao e) {
+            System.out.println("Erro na reserva: " + e.getMessage());
+        } catch (InputMismatchException e) {
+            System.out.println("Digite valores numéricos para o número do quarto.");
+        } catch (RuntimeException e) {
+            System.out.println("Ocorreu um erro inesperado.");
+        }
 
         SCAN.close();
     }

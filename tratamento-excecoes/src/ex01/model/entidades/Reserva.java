@@ -1,5 +1,7 @@
 package ex01.model.entidades;
 
+import ex01.model.excecoes.DominioExcecao;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -10,6 +12,8 @@ public class Reserva {
     private LocalDate dataSaida;
 
     public Reserva(Integer numeroQuarto, LocalDate dataEntrada, LocalDate dataSaida) {
+        verificarDatas(dataEntrada, dataSaida);
+
         this.numeroQuarto = numeroQuarto;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
@@ -43,8 +47,20 @@ public class Reserva {
         return dataSaida.getDayOfMonth() - dataEntrada.getDayOfMonth();
     }
     public void atualizarData(LocalDate dataEntrada, LocalDate dataSaida) {
+        verificarDatas(dataEntrada, dataSaida);
+
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
+    }
+
+    public void verificarDatas(LocalDate dataEntrada, LocalDate dataSaida) {
+        LocalDate dataAtual = LocalDate.now();
+
+        if (dataEntrada.isBefore(dataAtual) || dataSaida.isBefore(dataAtual)) {
+            throw new DominioExcecao("A data das reservas para atualização devem ser futuras.");
+        } else if (dataEntrada.isAfter(dataSaida)) {
+            throw new DominioExcecao("Data de saída deve ser posterior a data de entrada.");
+        }
     }
 
     @Override
