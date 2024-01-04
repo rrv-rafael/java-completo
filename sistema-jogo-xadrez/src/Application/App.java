@@ -1,9 +1,11 @@
 package Application;
 
-import CamadaTabuleiro.Tabuleiro;
+import CamadaXadrez.PartidaXadrez;
 
 public class App {
     public static void main(String[] args) {
-        Tabuleiro tabuleiro = new Tabuleiro(8, 8);
+        PartidaXadrez partidaXadrez = new PartidaXadrez();
+
+        InterfaceUsuario.imprimirTabuleiro(partidaXadrez.getPecas());
     }
 }
