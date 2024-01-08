@@ -1,6 +1,8 @@
 package CamadaXadrez;
 
-public class XadrezExcecao extends RuntimeException {
+import CamadaTabuleiro.TabuleiroExcecao;
+
+public class XadrezExcecao extends TabuleiroExcecao {
     public XadrezExcecao(String message) {
         super(message);
     }
