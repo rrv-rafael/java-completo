@@ -10,7 +10,7 @@ public class App {
         // Caminho no windows:
         //File file = new File("C:\\temp\\int.txt");
         // Caminho no mac:
-        File file = new File("/Users/rafael/Documents/All/Estudo/Linguagem/Java/Java - Completo/Projetos/tratamento-excecoes/in.rtf");
+        File file = new File("");
         Scanner scan = null;
 
         try {

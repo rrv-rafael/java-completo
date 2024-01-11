@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        File file = new File("/Users/rafael/Documents/All/Estudo/Linguagem/Java/Java - Completo/Projetos/trabalhando-com-arquivos/in.rtf");
+        File file = new File("");
 
         try (Scanner scan = new Scanner(file)) {
             while (scan.hasNextLine()) {

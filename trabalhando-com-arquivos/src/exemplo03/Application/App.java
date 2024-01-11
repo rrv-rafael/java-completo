@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) {
-        String caminho = "/Users/rafael/Documents/All/Estudo/Linguagem/Java/Java - Completo/Projetos/trabalhando-com-arquivos/in.rtf";
+        String caminho = "";
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(caminho))) {
             String linha = bufferedReader.readLine();
