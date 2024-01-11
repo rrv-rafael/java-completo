@@ -7,10 +7,9 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        // Caminho no windows:
-        //File file = new File("C:\\temp\\int.txt");
-        // Caminho no mac:
-        File file = new File("");
+        // Caminho no windows: C:\\temp\\int.txt
+        // Caminho no macOS:
+        File file = new File("/Users/rafael/in.rtf");
         Scanner scan = null;
 
         try {

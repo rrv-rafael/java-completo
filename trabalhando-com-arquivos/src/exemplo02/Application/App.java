@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) {
-        String caminho = "";
+        String caminho = "/Users/rafael/in.rtf";
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
 

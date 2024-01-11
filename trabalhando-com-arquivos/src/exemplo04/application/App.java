@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) {
         String[] linhas = new String[]{"Bom dia", "Boa tarde", "Boa noite"};
 
-        String caminho = "";
+        String caminho = "/Users/rafael/in.rtf";
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(caminho))) {
             for (String linha : linhas) {

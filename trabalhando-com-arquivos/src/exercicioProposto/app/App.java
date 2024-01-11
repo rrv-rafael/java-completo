@@ -23,7 +23,7 @@ public class App {
         Produto produto;
         List<Produto> produtos = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             System.out.print("Nome: ");
             String nomeProduto = scan.nextLine();
             System.out.print("Preço unitário: ");
@@ -37,7 +37,9 @@ public class App {
             produtos.add(produto);
         }
 
-        String caminhoArquivo = "";
+        // Caminho windows: C:\\temp\\int.txt
+        // Caminho macOS:
+        String caminhoArquivo = "/Users/rafael/produtos.csv";
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(caminhoArquivo))) {
             for (Produto p : produtos) {
@@ -67,7 +69,7 @@ public class App {
             logger.log(Level.SEVERE, "Ocorreu um erro ao ler o arquivo.", e);
         }
 
-        String caminhoDiretorio = "";
+        String caminhoDiretorio = "/Users/rafael/saida";
 
         caminhoArquivo = caminhoDiretorio + "/sumario.csv";
 
