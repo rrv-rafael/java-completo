@@ -22,7 +22,7 @@ public class App {
 
         List<Produto> produtos = new ArrayList<>();
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.print("Nome: ");
             String nomeProduto = scan.nextLine();
             System.out.print("Preço unitário: ");
@@ -86,8 +86,7 @@ public class App {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(caminhoArquivo))) {
             for (Produto p : produtosArquivo) {
-                bufferedWriter.write(p.getNome() + ",");
-                bufferedWriter.write(String.format("%.2f", p.calcularValorTotal()));
+                bufferedWriter.write(p.getNome() + "," + String.format("%.2f", p.calcularValorTotal()));
                 bufferedWriter.newLine();
             }
 
