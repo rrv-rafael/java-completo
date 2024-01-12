@@ -39,7 +39,8 @@ public class App {
 
         // Caminho windows: C:\\temp\\int.txt
         // Caminho macOS:
-        String caminhoArquivo = "/Users/rafael/produtos.csv";
+        String caminho = "/Users/rafael/produtos.csv";
+        File caminhoArquivo = new File(caminho);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(caminhoArquivo))) {
             for (Produto p : produtos) {
@@ -49,14 +50,14 @@ public class App {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Ocorreu um erro ao criar o arquivo.", e);
+            logger.log(Level.SEVERE, "Ocorreu um erro ao escrever o arquivo.", e);
         }
 
 
         String[] produtoArquivo;
         List<Produto> produtosArquivo = new ArrayList<>();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(caminhoArquivo))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(caminho))) {
             String linha = bufferedReader.readLine();
 
             while (linha != null) {
@@ -69,15 +70,11 @@ public class App {
             logger.log(Level.SEVERE, "Ocorreu um erro ao ler o arquivo.", e);
         }
 
-        String caminhoDiretorio = "/Users/rafael/saida";
+        File caminhoDiretorio = new File(caminhoArquivo.getParent() + "/saida");
 
-        caminhoArquivo = caminhoDiretorio + "/sumario.csv";
-
-        File diretorio = new File(caminhoDiretorio);
-
-        if (!diretorio.exists()) {
+        if (!caminhoDiretorio.exists()) {
             try {
-               if (diretorio.mkdirs()) {
+               if (caminhoDiretorio.mkdir()) {
                    System.out.println("\nDiretório criado com sucesso.");
                }
             } catch (SecurityException e) {
@@ -86,9 +83,9 @@ public class App {
             }
         }
 
-        File arquivo = new File(caminhoArquivo);
+        caminhoArquivo = new File(caminhoDiretorio + "/sumario.csv");
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(arquivo))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(caminhoArquivo))) {
             for (Produto p : produtosArquivo) {
                 bufferedWriter.write(p.getNome() + ",");
                 bufferedWriter.write(String.format("%.2f", p.calcularValorTotal()));
