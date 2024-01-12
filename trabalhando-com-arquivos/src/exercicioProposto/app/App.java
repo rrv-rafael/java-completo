@@ -20,7 +20,6 @@ public class App {
 
         System.out.println("Preencha abaixo as informações do produto:");
 
-        Produto produto;
         List<Produto> produtos = new ArrayList<>();
 
         for (int i = 0; i < 1; i++) {
@@ -32,9 +31,7 @@ public class App {
             int quantidade = scan.nextInt();
             scan.nextLine();
 
-            produto = new Produto(nomeProduto, precoUnitario, quantidade);
-
-            produtos.add(produto);
+            produtos.add(new Produto(nomeProduto, precoUnitario, quantidade));
         }
 
         // Caminho windows: C:\\temp\\int.txt
@@ -53,7 +50,6 @@ public class App {
             logger.log(Level.SEVERE, "Ocorreu um erro ao escrever o arquivo.", e);
         }
 
-
         String[] produtoArquivo;
         List<Produto> produtosArquivo = new ArrayList<>();
 
@@ -62,8 +58,11 @@ public class App {
 
             while (linha != null) {
                 produtoArquivo = linha.split(",");
-                produto = new Produto(produtoArquivo[0], Double.parseDouble(produtoArquivo[1]), Integer.parseInt(produtoArquivo[2]));
-                produtosArquivo.add(produto);
+                String nome = produtoArquivo[0];
+                double preco = Double.parseDouble(produtoArquivo[1]);
+                int quantidade = Integer.parseInt(produtoArquivo[2]);
+
+                produtosArquivo.add(new Produto(nome, preco, quantidade));
                 linha = bufferedReader.readLine();
             }
         } catch (IOException e) {
