@@ -1,7 +1,7 @@
 package ex02.app;
 
 import ex02.entidades.Contrato;
-import ex02.services.PaypalService;
+import ex02.services.ContratoService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,13 +26,16 @@ public class Application {
         System.out.print("Informe o número de parcelas: ");
         int numeroParcelas = scan.nextInt();
 
-        Contrato contrato = new Contrato(numeroContrato, dataContrato, valorContrato, new PaypalService());
+        Contrato contrato = new Contrato(numeroContrato, dataContrato, valorContrato);
 
-        double valorParcela = contrato.getValorTotal() / numeroParcelas;
+        ContratoService contratoService = new ContratoService();
+
+        contratoService.processarContrato(contrato, numeroParcelas);
 
         System.out.println("Parcelas:");
-        for (int i = 1; i <= numeroParcelas; i++) {
-            System.out.println(dataContrato.plusMonths(i).format(formatter) + " - " + contrato.getPaypalService().calcularPagamentoMensal(valorParcela, i));
+
+        for (int i = 0; i < contrato.getParcelas().size(); i++) {
+            System.out.println(contrato.getParcelas().get(i).getDataPagamento() + " - " + contrato.getParcelas().get(i).getValor());
         }
 
         scan.close();

@@ -1,5 +1,6 @@
 package ex02.interfaces;
 
 public interface IPagamentoService {
-    double calcularPagamentoMensal(double valorContrato, int numeroParcelas);
+    double calcularTaxaPagamento(double valor);
+    double calcularJuros(double valor, int numeroParcelas);
 }

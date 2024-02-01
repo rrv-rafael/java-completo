@@ -7,10 +7,12 @@ import java.time.LocalDate;
 
 public class PaypalService implements IPagamentoService {
     @Override
-    public double calcularPagamentoMensal(double valorParcela, int numeroParcela) {
-        valorParcela += valorParcela * (double) numeroParcela / 100;
-        valorParcela += valorParcela * 0.02;
+    public double calcularTaxaPagamento(double valor) {
+        return valor + valor * 0.02;
+    }
 
-        return valorParcela;
+    @Override
+    public double calcularJuros(double valor, int numeroParcela) {
+        return valor + valor * (double) numeroParcela / 100;
     }
 }

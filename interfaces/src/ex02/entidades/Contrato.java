@@ -1,20 +1,20 @@
 package ex02.entidades;
 
-import ex02.services.PaypalService;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Contrato {
     private Integer numero;
     private LocalDate data;
     private Double valorTotal;
-    private PaypalService paypalService;
+    private List<Parcela> parcelas;
 
-    public Contrato(Integer numero, LocalDate data, Double valorTotal, PaypalService paypalService) {
+    public Contrato(Integer numero, LocalDate data, Double valorTotal) {
         this.numero = numero;
         this.data = data;
         this.valorTotal = valorTotal;
-        this.paypalService = paypalService;
+        parcelas = new ArrayList<>();
     }
 
     public Integer getNumero() {
@@ -41,11 +41,11 @@ public class Contrato {
         this.valorTotal = valorTotal;
     }
 
-    public PaypalService getPaypalService() {
-        return paypalService;
+    public List<Parcela> getParcelas() {
+        return parcelas;
     }
 
-    public void setPaypalService(PaypalService paypalService) {
-        this.paypalService = paypalService;
+    public void setParcelas(List<Parcela> parcelas) {
+        this.parcelas = parcelas;
     }
 }
