@@ -20,6 +20,6 @@ public class Circulo extends Forma {
 
     @Override
     public double area() {
-        return 0;
+        return Math.PI * Math.pow(raio, 2);
     }
 }

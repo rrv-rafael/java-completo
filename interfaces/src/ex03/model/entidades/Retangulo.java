@@ -30,6 +30,6 @@ public class Retangulo extends Forma {
 
     @Override
     public double area() {
-        return 0;
+        return largura * altura;
     }
 }
