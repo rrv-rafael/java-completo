@@ -5,16 +5,21 @@ import ex02.entidades.Parcela;
 import ex02.interfaces.IPagamentoService;
 
 public class ContratoService {
+    private final IPagamentoService pagamentoService;
+
+    public ContratoService(IPagamentoService pagamentoService) {
+        this.pagamentoService = pagamentoService;
+    }
+
     public void processarContrato(Contrato contrato, int numeroParcelas) {
-        IPagamentoService pagamentoService = new PaypalService();
-        double valorParcela = contrato.getValorTotal() / numeroParcelas;
+        double valorParcelaBasica = contrato.getValorTotal() / numeroParcelas;
         double valorParcelaJuros;
-        double valorParcelaCalculada;
+        double valorParcela;
 
         for (int i = 1; i <= numeroParcelas; i++) {
-            valorParcelaJuros = valorParcela + pagamentoService.calcularJuros(valorParcela, i);
-            valorParcelaCalculada = valorParcelaJuros + pagamentoService.calcularTaxaPagamento(valorParcelaJuros);
-            contrato.getParcelas().add(new Parcela(contrato.getData().plusMonths(i), valorParcelaCalculada));
+            valorParcelaJuros = valorParcelaBasica + pagamentoService.calcularJuros(valorParcelaBasica, i);
+            valorParcela = valorParcelaJuros + pagamentoService.calcularTaxaPagamento(valorParcelaJuros);
+            contrato.getParcelas().add(new Parcela(contrato.getData().plusMonths(i), valorParcela));
         }
     }
 }
