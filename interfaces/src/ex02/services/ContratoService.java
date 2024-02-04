@@ -8,11 +8,13 @@ public class ContratoService {
     public void processarContrato(Contrato contrato, int numeroParcelas) {
         IPagamentoService pagamentoService = new PaypalService();
         double valorParcela = contrato.getValorTotal() / numeroParcelas;
-        double valorTaxaCalculada;
+        double valorParcelaJuros;
+        double valorParcelaCalculada;
 
         for (int i = 1; i <= numeroParcelas; i++) {
-            valorTaxaCalculada = pagamentoService.calcularTaxaPagamento(valorParcela);
-            contrato.getParcelas().add(new Parcela(contrato.getData().plusMonths(i), pagamentoService.calcularJuros(valorTaxaCalculada, i)));
+            valorParcelaJuros = valorParcela + pagamentoService.calcularJuros(valorParcela, i);
+            valorParcelaCalculada = valorParcelaJuros + pagamentoService.calcularTaxaPagamento(valorParcelaJuros);
+            contrato.getParcelas().add(new Parcela(contrato.getData().plusMonths(i), valorParcelaCalculada));
         }
     }
 }
