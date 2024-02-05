@@ -2,7 +2,7 @@ package ex03.model.entidades;
 
 import ex03.model.enums.Cor;
 
-public class Retangulo extends Forma {
+public class Retangulo extends FormaAbstrata {
     private Double largura;
     private Double altura;
 

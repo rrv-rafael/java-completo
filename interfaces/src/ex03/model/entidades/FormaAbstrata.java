@@ -1,11 +1,12 @@
 package ex03.model.entidades;
 
 import ex03.model.enums.Cor;
+import ex03.model.interfaces.Forma;
 
-public abstract class Forma {
+public abstract class FormaAbstrata implements Forma {
     private Cor cor;
 
-    public Forma(Cor cor) {
+    public FormaAbstrata(Cor cor) {
         this.cor = cor;
     }
 
@@ -16,6 +17,4 @@ public abstract class Forma {
     public void setCor(Cor cor) {
         this.cor = cor;
     }
-
-    public abstract double area();
 }

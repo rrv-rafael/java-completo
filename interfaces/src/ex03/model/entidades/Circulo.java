@@ -2,7 +2,7 @@ package ex03.model.entidades;
 
 import ex03.model.enums.Cor;
 
-public class Circulo extends Forma {
+public class Circulo extends FormaAbstrata {
     private Double raio;
 
     public Circulo(Cor cor, Double raio) {
