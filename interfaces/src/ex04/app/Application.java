@@ -37,7 +37,7 @@ public class Application {
             System.out.println("Nomes:");
 
             for (Funcionario f : funcionarios) {
-                System.out.println(f.getNome() + " - " +  f.getSalario());
+                System.out.println(f.getNome() + ", " +  f.getSalario());
             }
         } catch (IOException e) {
             System.out.println("Ocorreu um erro ao abrir o arquivo." + e);
