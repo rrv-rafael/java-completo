@@ -1,31 +1,43 @@
 package ex04.app;
 
+import ex04.entidades.Funcionario;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Application {
     public static void main(String[] args) {
-        List<String> nomes = new ArrayList<>();
-        String caminho = "/Users/rafael/nomes.txt";
+        Funcionario funcionario;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        String caminho = "/Users/rafael/funcionarios.csv";
+        String[] funcionarioArquivo;
+        String nome;
+        double salario;
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(caminho))) {
             String linha = bufferedReader.readLine();
 
             while (linha != null) {
-                nomes.add(linha);
+                funcionarioArquivo = linha.split(",");
+                nome = funcionarioArquivo[0];
+                salario = Double.parseDouble(funcionarioArquivo[1]);
+
+                funcionario = new Funcionario(nome, salario);
+
+                funcionarios.add(funcionario);
                 linha = bufferedReader.readLine();
             }
 
-            Collections.sort(nomes);
+            Comparator<Funcionario> compararNome = Comparator.comparing(Funcionario::getNome);
+
+            funcionarios.sort(compararNome);
 
             System.out.println("Nomes:");
 
-            for (String nome : nomes) {
-                System.out.println(nome);
+            for (Funcionario f : funcionarios) {
+                System.out.println(f.getNome() + " - " +  f.getSalario());
             }
         } catch (IOException e) {
             System.out.println("Ocorreu um erro ao abrir o arquivo." + e);
