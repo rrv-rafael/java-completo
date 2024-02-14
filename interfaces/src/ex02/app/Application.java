@@ -6,8 +6,8 @@ import ex02.services.ContratoService;
 import ex02.services.PaypalService;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
