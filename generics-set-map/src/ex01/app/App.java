@@ -1,6 +1,6 @@
-package app;
+package ex01.app;
 
-import model.services.PrintService;
+import ex01.model.services.PrintService;
 
 import java.util.Scanner;
 
