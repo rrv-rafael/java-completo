@@ -38,5 +38,7 @@ public class App {
         } catch (Exception e) {
             System.out.println("Não foi possível ler o arquivo.");
         }
+
+        scanner.close();
     }
 }
