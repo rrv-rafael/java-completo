@@ -1,14 +1,14 @@
 package ex05.entidades;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Log {
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private String nomeUsuario;
-    private LocalDateTime instanteAcesso;
+    private Instant instanteAcesso;
 
-    public Log(String nomeUsuario, LocalDateTime instanteAcesso) {
+    public Log(String nomeUsuario, Instant instanteAcesso) {
         this.nomeUsuario = nomeUsuario;
         this.instanteAcesso = instanteAcesso;
     }
@@ -21,16 +21,11 @@ public class Log {
         this.nomeUsuario = nomeUsuario;
     }
 
-    public LocalDateTime getInstanteAcesso() {
+    public Instant getInstanteAcesso() {
         return instanteAcesso;
     }
 
-    public void setInstanteAcesso(LocalDateTime instanteAcesso) {
+    public void setInstanteAcesso(Instant instanteAcesso) {
         this.instanteAcesso = instanteAcesso;
-    }
-
-    @Override
-    public String toString() {
-        return nomeUsuario + " - " + FORMATTER.format(instanteAcesso);
     }
 }

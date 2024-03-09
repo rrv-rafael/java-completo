@@ -4,35 +4,39 @@ import ex05.entidades.Log;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        String caminho = "C:\\All\\log.txt";
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Informe o caminho do arquivo: ");
+        String caminho = scanner.next();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(caminho))) {
             String linha;
             String[] conteudoArquivo;
+
+            Log log;
 
             Set<Log> set = new HashSet<>();
 
             while ((linha = bufferedReader.readLine()) != null) {
                 conteudoArquivo = linha.split(" ");
                 String nomeUsuario = conteudoArquivo[0];
-                LocalDateTime instanteAcesso = LocalDateTime.parse(conteudoArquivo[1]);
+                Instant instanteAcesso = Instant.parse(conteudoArquivo[1]);
 
-                set.add(new Log(nomeUsuario, instanteAcesso));
+                log = new Log(nomeUsuario, instanteAcesso);
+
+                set.add(log);
             }
 
-            for (Log log : set) {
-                System.out.println(log);
-            }
+            System.out.printf("Total de usuários: %d", set.size());
         } catch (Exception e) {
-            System.out.println("Não foi possível ler o aruqivo.");
+            System.out.println("Não foi possível ler o arquivo.");
         }
     }
 }
