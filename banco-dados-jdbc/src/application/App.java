@@ -1,35 +1,38 @@
 package application;
 
-import db.DB;
+import services.Crud;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class App {
-    private static final Logger logger = Logger.getLogger(App.class.getName());
     public static void main(String[] args) {
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Scanner scanner = new Scanner(System.in);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        try {
-            connection = DB.getConnection();
-            statement = connection.createStatement();
+        //Crud.buscarDados();
 
-            resultSet = statement.executeQuery("SELECT * FROM department");
+        System.out.print("Informe os dados para inserção no banco.");
+        System.out.print("\nNome: ");
+        String nome = scanner.nextLine();
 
-            while (resultSet.next()) {
-                System.out.println(resultSet.getInt("Id") + " - " + resultSet.getString("Name"));
-            }
-        } catch (SQLException e) {
-            logger.severe("Ocorreu o seguinte erro: " + e.getMessage());
-        } finally {
-            DB.closeResultSet(resultSet);
-            DB.closeStatement(statement);
-            DB.closeConnection();
-        }
+        System.out.print("E-mail: ");
+        String email = scanner.next();
+
+        System.out.print("Data de nascimento: ");
+        scanner.nextLine();
+        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), dateTimeFormatter);
+
+        System.out.print("Sálario base: ");
+        double salarioBase = scanner.nextDouble();
+
+        System.out.print("Código do departamento: ");
+        int codDepartamento = scanner.nextInt();
+
+        Crud.inserirDados(nome, email, dataNascimento, salarioBase, codDepartamento);
+
+        scanner.close();
     }
 }
