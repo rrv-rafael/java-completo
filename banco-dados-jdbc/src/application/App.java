@@ -5,7 +5,6 @@ import services.Crud;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class App {
     public static void main(String[] args) {
@@ -13,7 +12,7 @@ public class App {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         //Crud.buscarDados();
-
+        /*
         System.out.print("Informe os dados para inserção no banco.");
         System.out.print("\nNome: ");
         String nome = scanner.nextLine();
@@ -31,8 +30,16 @@ public class App {
         System.out.print("Código do departamento: ");
         int codDepartamento = scanner.nextInt();
 
-        Crud.inserirDados(nome, email, dataNascimento, salarioBase, codDepartamento);
+        Crud.inserirVendedor(nome, email, dataNascimento, salarioBase, codDepartamento);
+        */
+        System.out.print("Informe os dados para atualizar.");
+        System.out.print("\nInforme o valor do aumento salarial: ");
+        double aumentoSalarial = scanner.nextDouble();
 
+        System.out.print("Codigo do vendedor: ");
+        int codVendedor = scanner.nextInt();
+
+        Crud.atualizarDados(aumentoSalarial, codVendedor);
         scanner.close();
     }
 }
