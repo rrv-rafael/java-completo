@@ -2,6 +2,7 @@ package services;
 
 import application.App;
 import db.DB;
+import db.DbIntegrityException;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -79,6 +80,25 @@ public class Crud {
             System.out.println("Pronto! Linhas afetadas: " + linhasAfetadas);
         } catch (SQLException e) {
             logger.severe("Ocorreu o seguinte erro: " + e.getMessage());
+        } finally {
+            DB.closeStatement(preparedStatement);
+            DB.closeConnection();
+        }
+    }
+
+    public static void deletarDados(int codDepartamento) {
+        try {
+            Connection connection = DB.getConnection();
+            String query = "DELETE FROM departamento WHERE CodDepartamento = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, codDepartamento);
+
+            int linhasAfetadas = preparedStatement.executeUpdate();
+            System.out.println("Pronto! Linhas afetadas: " + linhasAfetadas);
+        } catch (SQLException e) {
+            throw new DbIntegrityException(e.getMessage());
         } finally {
             DB.closeStatement(preparedStatement);
             DB.closeConnection();
