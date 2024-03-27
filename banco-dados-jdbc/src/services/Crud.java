@@ -2,6 +2,7 @@ package services;
 
 import application.App;
 import db.DB;
+import db.DbException;
 import db.DbIntegrityException;
 
 import java.sql.*;
@@ -10,13 +11,14 @@ import java.util.logging.Logger;
 
 public class Crud {
     private static final Logger logger = Logger.getLogger(App.class.getName());
+    private static Connection connection;
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
     public static void buscarDados() {
         try {
-            Connection connection = DB.getConnection();
+            connection = DB.getConnection();
             statement = connection.createStatement();
 
             resultSet = statement.executeQuery("SELECT * FROM departamento");
@@ -35,7 +37,7 @@ public class Crud {
 
     public static void inserirVendedor(String nome, String email, LocalDate dataNascimento, double salariobase, int codDepartamento) {
         try {
-            Connection connection = DB.getConnection();
+            connection = DB.getConnection();
             String query = "INSERT INTO vendedor (Nome, Email, DataNascimento, SalarioBase, CodDepartamento)" +
                            "VALUES (?, ?, ?, ?, ?)";
 
@@ -69,7 +71,7 @@ public class Crud {
 
     public static void atualizarDados(double aumentoSalarial, int codVendedor) {
         try {
-            Connection connection = DB.getConnection();
+            connection = DB.getConnection();
             String query = "UPDATE vendedor SET SalarioBase = SalarioBase + ? WHERE CodVendedor = ?";
             preparedStatement = connection.prepareStatement(query);
 
@@ -88,7 +90,7 @@ public class Crud {
 
     public static void deletarDados(int codDepartamento) {
         try {
-            Connection connection = DB.getConnection();
+            connection = DB.getConnection();
             String query = "DELETE FROM departamento WHERE CodDepartamento = ?";
 
             preparedStatement = connection.prepareStatement(query);
@@ -99,6 +101,36 @@ public class Crud {
             System.out.println("Pronto! Linhas afetadas: " + linhasAfetadas);
         } catch (SQLException e) {
             throw new DbIntegrityException(e.getMessage());
+        } finally {
+            DB.closeStatement(preparedStatement);
+            DB.closeConnection();
+        }
+    }
+
+    public static void atualizarSalarioVendedores(int codVendedor, double aumentoSalarial) {
+        try {
+            connection = DB.getConnection();
+
+            connection.setAutoCommit(false);
+
+            String query = "UPDATE Vendedor SET SalarioBase = SalarioBase + ? WHERE CodVendedor = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setDouble(1, aumentoSalarial);
+            preparedStatement.setInt(2, codVendedor);
+
+            int linhasAfetadas = preparedStatement.executeUpdate();
+            System.out.println("Pronto! Linhas afetadas: " + linhasAfetadas);
+
+            connection.commit();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+                throw new DbException("Transação não foi concluída. Causa do erro: " + e.getMessage());
+            } catch (SQLException exception) {
+                throw new DbException("Erro ao tentar a transação. Causa do erro: " + exception.getMessage());
+            }
         } finally {
             DB.closeStatement(preparedStatement);
             DB.closeConnection();

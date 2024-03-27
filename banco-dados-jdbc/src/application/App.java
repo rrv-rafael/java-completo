@@ -40,13 +40,22 @@ public class App {
         int codVendedor = scanner.nextInt();
 
         Crud.atualizarDados(aumentoSalarial, codVendedor);
-         */
+
 
         System.out.println("Informe os dados para fazer o delete.");
         System.out.print("\nInforme o código do departamento: ");
         int codDepartamento = scanner.nextInt();
 
         Crud.deletarDados(codDepartamento);
+
+        */
+        System.out.print("Informe os dados para fazer o update.");
+        System.out.print("\nInforme o código do vendedor: ");
+        int codVendedor = scanner.nextInt();
+        System.out.print("Informe o valor do aumento salarial: ");
+        double aumentoSalarial = scanner.nextDouble();
+
+        Crud.atualizarSalarioVendedores(codVendedor, aumentoSalarial);
 
         scanner.close();
     }
