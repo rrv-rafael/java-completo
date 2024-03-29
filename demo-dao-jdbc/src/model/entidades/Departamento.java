@@ -3,20 +3,20 @@ package model.entidades;
 import java.util.Objects;
 
 public class Departamento {
-    private Integer id;
+    private Integer codDepartamento;
     private String nome;
 
-    public Departamento(Integer id, String nome) {
-        this.id = id;
+    public Departamento(Integer codDepartamento, String nome) {
+        this.codDepartamento = codDepartamento;
         this.nome = nome;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCodDepartamento() {
+        return codDepartamento;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCodDepartamento(Integer codDepartamento) {
+        this.codDepartamento = codDepartamento;
     }
 
     public String getNome() {
@@ -32,18 +32,18 @@ public class Departamento {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Departamento that = (Departamento) o;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getCodDepartamento(), that.getCodDepartamento());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getCodDepartamento());
     }
 
     @Override
     public String toString() {
         return "Departamento{" +
-                "id=" + id +
+                "id=" + codDepartamento +
                 ", nome='" + nome + '\'' +
                 '}';
     }
