@@ -8,16 +8,19 @@ public class Vendedor {
     private String nome;
     private String email;
     private LocalDate dataNascimento;
-    private Double baseSalarial;
+    private Double salarioBase;
 
     private Departamento departamento;
 
-    public Vendedor(Integer codVendedor, String nome, String email, LocalDate dataNascimento, Double baseSalarial, Departamento departamento) {
+    public Vendedor() {
+    }
+
+    public Vendedor(Integer codVendedor, String nome, String email, LocalDate dataNascimento, Double salarioBase, Departamento departamento) {
         this.codVendedor = codVendedor;
         this.nome = nome;
         this.email = email;
         this.dataNascimento = dataNascimento;
-        this.baseSalarial = baseSalarial;
+        this.salarioBase = salarioBase;
         this.departamento = departamento;
     }
 
@@ -53,12 +56,12 @@ public class Vendedor {
         this.dataNascimento = dataNascimento;
     }
 
-    public Double getBaseSalarial() {
-        return baseSalarial;
+    public Double getSalarioBase() {
+        return salarioBase;
     }
 
-    public void setBaseSalarial(Double baseSalarial) {
-        this.baseSalarial = baseSalarial;
+    public void setSalarioBase(Double salarioBase) {
+        this.salarioBase = salarioBase;
     }
 
     public Departamento getDepartamento() {
@@ -89,7 +92,7 @@ public class Vendedor {
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", dataNascimento=" + dataNascimento +
-                ", baseSalarial=" + baseSalarial +
+                ", baseSalarial=" + salarioBase +
                 ", departamento=" + departamento +
                 '}';
     }

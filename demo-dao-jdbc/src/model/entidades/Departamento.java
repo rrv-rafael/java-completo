@@ -6,6 +6,9 @@ public class Departamento {
     private Integer codDepartamento;
     private String nome;
 
+    public Departamento() {
+    }
+
     public Departamento(Integer codDepartamento, String nome) {
         this.codDepartamento = codDepartamento;
         this.nome = nome;
