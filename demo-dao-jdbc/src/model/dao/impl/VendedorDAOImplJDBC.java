@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class VendedorDAOImplJDBC implements VendedorDAO {
-    private Connection connection;
+    private final Connection connection;
 
     public VendedorDAOImplJDBC(Connection connection) {
         this.connection = connection;
@@ -49,24 +49,9 @@ public class VendedorDAOImplJDBC implements VendedorDAO {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                Departamento departamento = new Departamento();
+                Departamento departamento = instatiateDepartamento(resultSet);
 
-                departamento.setCodDepartamento(resultSet.getInt("CodDepartamento"));
-                departamento.setNome(resultSet.getString("NomeDepartamento"));
-
-                Vendedor vendedor = new Vendedor();
-
-                vendedor.setCodVendedor(resultSet.getInt("CodVendedor"));
-                vendedor.setNome(resultSet.getString("Nome"));
-                vendedor.setEmail(resultSet.getString("Email"));
-                Timestamp timestamp = resultSet.getTimestamp("DataNascimento");
-                LocalDateTime localDateTime = timestamp.toLocalDateTime();
-                LocalDate localDate = localDateTime.toLocalDate();
-                vendedor.setDataNascimento(localDate);
-                vendedor.setSalarioBase(resultSet.getDouble("SalarioBase"));
-                vendedor.setDepartamento(departamento);
-
-                return vendedor;
+                return instatiateVendedor(resultSet, departamento);
             }
 
             return null;
@@ -77,6 +62,29 @@ public class VendedorDAOImplJDBC implements VendedorDAO {
             DB.closeStatement(preparedStatement);
             DB.closeResultSet(resultSet);
         }
+    }
+
+    private Vendedor instatiateVendedor(ResultSet resultSet, Departamento departamento) throws SQLException {
+        Vendedor vendedor = new Vendedor();
+        vendedor.setCodVendedor(resultSet.getInt("CodVendedor"));
+        vendedor.setNome(resultSet.getString("Nome"));
+        vendedor.setEmail(resultSet.getString("Email"));
+        Timestamp timestamp = resultSet.getTimestamp("DataNascimento");
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        LocalDate localDate = localDateTime.toLocalDate();
+        vendedor.setDataNascimento(localDate);
+        vendedor.setSalarioBase(resultSet.getDouble("SalarioBase"));
+        vendedor.setDepartamento(departamento);
+
+        return vendedor;
+    }
+
+    private Departamento instatiateDepartamento(ResultSet resultSet) throws SQLException {
+        Departamento departamento = new Departamento();
+        departamento.setCodDepartamento(resultSet.getInt("CodDepartamento"));
+        departamento.setNome(resultSet.getString("NomeDepartamento"));
+
+        return departamento;
     }
 
     @Override
