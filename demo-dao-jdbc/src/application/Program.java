@@ -1,5 +1,7 @@
 package application;
 
+import model.dao.DAOFactory;
+import model.dao.VendedorDAO;
 import model.entidades.Departamento;
 import model.entidades.Vendedor;
 
@@ -13,6 +15,8 @@ public class Program {
         Departamento departamento = new Departamento(1, "Livros");
 
         Vendedor vendedor = new Vendedor(1, "Rafael Rodrigues Vitor", "rafael.vitor@gmail.com", LocalDate.parse("12/11/1992", dateTimeFormatter), 3.000, departamento);
+
+        VendedorDAO vendedorDAO = DAOFactory.createVendedorDAO();
 
         System.out.println(vendedor);
     }
