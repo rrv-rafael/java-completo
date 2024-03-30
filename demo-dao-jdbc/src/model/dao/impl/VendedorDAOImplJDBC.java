@@ -61,7 +61,28 @@ public class VendedorDAOImplJDBC implements VendedorDAO {
 
     @Override
     public void update(Vendedor vendedor) {
+        PreparedStatement preparedStatement = null;
 
+        try {
+            String query = "UPDATE vendedor " +
+                           "SET Nome = ?, Email = ?, DataNascimento = ?, SalarioBase = ?, CodDepartamento = ? " +
+                           "WHERE CodVendedor = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, vendedor.getNome());
+            preparedStatement.setString(2, vendedor.getEmail());
+            preparedStatement.setObject(3, vendedor.getDataNascimento());
+            preparedStatement.setDouble(4, vendedor.getSalarioBase());
+            preparedStatement.setInt(5, vendedor.getDepartamento().getCodDepartamento());
+            preparedStatement.setInt(6, vendedor.getCodVendedor());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException("Ocorreu o seguinte erro: " + e.getMessage());
+        } finally {
+            DB.closeStatement(preparedStatement);
+        }
     }
 
     @Override

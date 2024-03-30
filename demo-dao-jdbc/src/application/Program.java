@@ -38,5 +38,11 @@ public class Program {
         Vendedor vendedorInsert = new Vendedor(null, "Greg", "greg@gmail.com", LocalDate.parse("21/03/1991", dateTimeFormatter), 4000.0, departamento);
         vendedorDAO.insert(vendedorInsert);
         System.out.println("Inserido. Novo codVendedor = " + vendedorInsert.getCodVendedor());
+
+        System.out.println("=== Teste 5: Vendedor update ===");
+        vendedor = vendedorDAO.findById(1);
+        vendedor.setNome("Marta Waine");
+        vendedorDAO.update(vendedor);
+        System.out.println("Update completado");
     }
 }
