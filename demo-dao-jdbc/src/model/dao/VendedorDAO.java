@@ -8,7 +8,7 @@ import java.util.List;
 public interface VendedorDAO {
     void insert(Vendedor vendedor);
     void update(Vendedor vendedor);
-    void delete(Vendedor vendedor);
+    void deleteById(Integer codVendedor);
     Vendedor findById(Integer codVendedor);
     List<Vendedor> findAll();
     List<Vendedor> findByDepartamento(Departamento departamento);

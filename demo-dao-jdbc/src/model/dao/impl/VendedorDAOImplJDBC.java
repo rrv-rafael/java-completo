@@ -86,8 +86,21 @@ public class VendedorDAOImplJDBC implements VendedorDAO {
     }
 
     @Override
-    public void delete(Vendedor vendedor) {
+    public void deleteById(Integer codVendedor) {
+        PreparedStatement preparedStatement = null;
 
+        try {
+            String query = "DELETE FROM vendedor WHERE CodVendedor = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, codVendedor);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException("Ocorreu o seguinte erro: " + e.getMessage());
+        } finally {
+            DB.closeStatement(preparedStatement);
+        }
     }
 
     @Override
