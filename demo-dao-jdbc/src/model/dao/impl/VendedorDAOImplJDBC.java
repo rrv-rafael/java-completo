@@ -23,7 +23,40 @@ public class VendedorDAOImplJDBC implements VendedorDAO {
 
     @Override
     public void insert(Vendedor vendedor) {
+        PreparedStatement preparedStatement = null;
 
+        try {
+            String query = "INSERT INTO vendedor (Nome, Email, DataNascimento, SalarioBase, CodDepartamento) " +
+                           "VALUES (?, ?, ?, ?, ?)";
+
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, vendedor.getNome());
+            preparedStatement.setString(2, vendedor.getEmail());
+            preparedStatement.setObject(3, vendedor.getDataNascimento());
+            preparedStatement.setDouble(4, vendedor.getSalarioBase());
+            preparedStatement.setInt(5, vendedor.getDepartamento().getCodDepartamento());
+
+            int linhasAfetadas = preparedStatement.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+                if (resultSet.next()) {
+                    int codVendedor = resultSet.getInt(1);
+                    vendedor.setCodVendedor(codVendedor);
+                }
+
+                DB.closeResultSet(resultSet);
+            } else {
+                throw new DbException("Erro inesperado. Nenhuma linha afetada.");
+            }
+
+        } catch (SQLException e) {
+            throw new DbException("Ocorreu o seguinte erro: " + e.getMessage());
+        } finally {
+            DB.closeStatement(preparedStatement);
+        }
     }
 
     @Override

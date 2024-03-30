@@ -5,6 +5,8 @@ import model.dao.VendedorDAO;
 import model.entidades.Departamento;
 import model.entidades.Vendedor;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Program {
@@ -29,5 +31,12 @@ public class Program {
         for (Vendedor v : vendedores) {
             System.out.println(v);
         }
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        System.out.println("=== Teste 4: Vendedor insert ===");
+        Vendedor vendedorInsert = new Vendedor(null, "Greg", "greg@gmail.com", LocalDate.parse("21/03/1991", dateTimeFormatter), 4000.0, departamento);
+        vendedorDAO.insert(vendedorInsert);
+        System.out.println("Inserido. Novo codVendedor = " + vendedorInsert.getCodVendedor());
     }
 }
