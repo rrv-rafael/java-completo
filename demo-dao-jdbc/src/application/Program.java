@@ -22,5 +22,12 @@ public class Program {
         for (Vendedor v : vendedores) {
             System.out.println(v);
         }
+
+        System.out.println("=== Teste 3: Vendedor findAll ===");
+        vendedores = vendedorDAO.findAll();
+
+        for (Vendedor v : vendedores) {
+            System.out.println(v);
+        }
     }
 }
