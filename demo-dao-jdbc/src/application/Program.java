@@ -1,6 +1,7 @@
 package application;
 
 import model.dao.DAOFactory;
+import model.dao.DepartamentoDAO;
 import model.dao.VendedorDAO;
 import model.entidades.Departamento;
 import model.entidades.Vendedor;
@@ -14,13 +15,16 @@ public class Program {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         VendedorDAO vendedorDAO = DAOFactory.createVendedorDAO();
+        DepartamentoDAO departamentoDAO = DAOFactory.createDepartamentoDAO();
+
+        Departamento departamento;
 
         System.out.println("=== Teste 1: Vendedor findById ===");
         Vendedor vendedor = vendedorDAO.findById(9);
         System.out.println(vendedor);
 
         System.out.println("=== Teste 2: Vendedor findByDepartamento ===");
-        Departamento departamento = new Departamento(2, null);
+        departamento = new Departamento(2, null);
         List<Vendedor> vendedores = vendedorDAO.findByDepartamento(departamento);
 
         for (Vendedor v : vendedores) {
@@ -51,6 +55,20 @@ public class Program {
         System.out.print("Informe o codVendedor que será deletado: ");
         int codVendedor = scanner.nextInt();
         vendedorDAO.deleteById(codVendedor);
+        System.out.println("Delete completado.");
+
+        System.out.println("=== Teste 7 departamento insert ===");
+        System.out.print("Informe o nome do departamento: ");
+        String nomeDepartamento = scanner.next();
+        departamento = new Departamento(null, nomeDepartamento);
+        departamentoDAO.insert(departamento);
+        System.out.println("Inserido. Novo codDepartamento: " + departamento.getCodDepartamento());
+
+        System.out.println("=== Teste 8 departamento delete ===");
+        System.out.print("Informe o código do departamento que será deletado: ");
+        int codDepartamento = scanner.nextInt();
+
+        departamentoDAO.deleteById(codDepartamento);
         System.out.println("Delete completado.");
 
         scanner.close();
