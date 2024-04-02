@@ -71,6 +71,23 @@ public class Program {
         departamentoDAO.deleteById(codDepartamento);
         System.out.println("Delete completado.");
 
+        System.out.println("=== Teste 9 departamento findById ===");
+        departamento = departamentoDAO.findById(5);
+        System.out.println(departamento);
+
+        System.out.println("=== Teste 10 departamento update ===");
+        departamento = departamentoDAO.findById(7);
+        departamento.setNome("Vestuário");
+        departamentoDAO.update(departamento);
+        System.out.println("Update completado.");
+
+        System.out.println("=== Teste 11 departamento findAll ===");
+        List<Departamento> departamentos = departamentoDAO.findAll();
+
+        for (Departamento d : departamentos) {
+            System.out.println(d);
+        }
+
         scanner.close();
     }
 }
