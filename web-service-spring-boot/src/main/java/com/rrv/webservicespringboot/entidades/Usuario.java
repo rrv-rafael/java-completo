@@ -1,5 +1,6 @@
 package com.rrv.webservicespringboot.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -21,8 +22,9 @@ public class Usuario implements Serializable {
     private String telefone;
     private String senha;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedidos = new ArrayList<>();
+    private final List<Pedido> pedidos = new ArrayList<>();
 
     public Usuario() {
     }
