@@ -1,5 +1,6 @@
 package com.rrv.webservicespringboot.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -18,7 +19,8 @@ public class Categoria implements Serializable {
     private Long codCategoria;
     private String nome;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categorias")
     private final Set<Produto> produtos = new HashSet<>();
 
     public Categoria() {
