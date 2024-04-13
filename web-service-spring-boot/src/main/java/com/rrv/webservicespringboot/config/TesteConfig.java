@@ -1,14 +1,8 @@
 package com.rrv.webservicespringboot.config;
 
-import com.rrv.webservicespringboot.entidades.Categoria;
-import com.rrv.webservicespringboot.entidades.Pedido;
-import com.rrv.webservicespringboot.entidades.Produto;
-import com.rrv.webservicespringboot.entidades.Usuario;
+import com.rrv.webservicespringboot.entidades.*;
 import com.rrv.webservicespringboot.entidades.enums.PedidoStatus;
-import com.rrv.webservicespringboot.repositories.CategoriaRepository;
-import com.rrv.webservicespringboot.repositories.PedidoRepository;
-import com.rrv.webservicespringboot.repositories.ProdutoRepository;
-import com.rrv.webservicespringboot.repositories.UsuarioRepository;
+import com.rrv.webservicespringboot.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +25,9 @@ public class TesteConfig implements CommandLineRunner {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -67,5 +64,12 @@ public class TesteConfig implements CommandLineRunner {
         usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
 
         pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));
+
+        ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 2, produto1.getPreco());
+        ItemPedido itemPedido2 = new ItemPedido(pedido3, produto3, 1, produto3.getPreco());
+        ItemPedido itemPedido3 = new ItemPedido(pedido2, produto3, 2, produto3.getPreco());
+        ItemPedido itemPedido4 = new ItemPedido(pedido3, produto5, 2, produto5.getPreco());
+
+        itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4));
     }
 }
