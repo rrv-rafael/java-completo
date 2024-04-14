@@ -71,5 +71,11 @@ public class TesteConfig implements CommandLineRunner {
         ItemPedido itemPedido4 = new ItemPedido(pedido3, produto5, 2, produto5.getPreco());
 
         itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4));
+
+        Pagamento pagamento1 = new Pagamento(null, Instant.parse("2029-06-20T21:53:07Z"), pedido1);
+
+        pedido1.setPagamento(pagamento1);
+
+        pedidoRepository.save(pedido1);
     }
 }
