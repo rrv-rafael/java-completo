@@ -22,4 +22,8 @@ public class UsuarioService {
 
         return optionalUsuario.orElse(null);
     }
+
+    public Usuario insert(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 }
