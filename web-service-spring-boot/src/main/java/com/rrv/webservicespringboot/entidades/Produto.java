@@ -1,5 +1,6 @@
 package com.rrv.webservicespringboot.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -24,6 +25,9 @@ public class Produto implements Serializable {
     @ManyToMany
     @JoinTable(name = "produto_categoria", joinColumns = @JoinColumn(name = "codProduto"), inverseJoinColumns = @JoinColumn(name = "codCategoria"))
     private final Set<Categoria> categorias = new HashSet<>();
+
+    @OneToMany(mappedBy = "codItemPedido.produto")
+    private final Set<ItemPedido> itemsPedido = new HashSet<>();
 
     public Produto() {
     }
@@ -78,6 +82,17 @@ public class Produto implements Serializable {
 
     public Set<Categoria> getCategorias() {
         return categorias;
+    }
+
+    @JsonIgnore
+    public Set<Pedido> getPedidos() {
+        Set<Pedido> set = new HashSet<>();
+
+        for (ItemPedido itemPedido : itemsPedido) {
+            set.add(itemPedido.getPedido());
+        }
+
+        return set;
     }
 
     @Override
