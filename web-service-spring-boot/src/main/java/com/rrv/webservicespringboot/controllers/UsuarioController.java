@@ -39,4 +39,11 @@ public class UsuarioController {
 
         return ResponseEntity.created(uri).body(usuario);
     }
+
+    @DeleteMapping(value = "/{codUsuario}")
+    public ResponseEntity<Void> delete(@PathVariable Long codUsuario) {
+        usuarioService.delete(codUsuario);
+
+        return ResponseEntity.noContent().build();
+    }
 }
