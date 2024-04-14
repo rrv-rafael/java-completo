@@ -66,7 +66,7 @@ public class TesteConfig implements CommandLineRunner {
         pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));
 
         ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 2, produto1.getPreco());
-        ItemPedido itemPedido2 = new ItemPedido(pedido3, produto3, 1, produto3.getPreco());
+        ItemPedido itemPedido2 = new ItemPedido(pedido1, produto3, 1, produto3.getPreco());
         ItemPedido itemPedido3 = new ItemPedido(pedido2, produto3, 2, produto3.getPreco());
         ItemPedido itemPedido4 = new ItemPedido(pedido3, produto5, 2, produto5.getPreco());
 
