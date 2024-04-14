@@ -1,5 +1,6 @@
 package com.rrv.webservicespringboot.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -17,6 +18,7 @@ public class Pagamento implements Serializable {
     private Long codPagamento;
     private Instant dataPagamento;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Pedido pedido;
