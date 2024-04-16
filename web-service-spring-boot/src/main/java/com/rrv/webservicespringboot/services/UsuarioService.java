@@ -2,6 +2,7 @@ package com.rrv.webservicespringboot.services;
 
 import com.rrv.webservicespringboot.entidades.Usuario;
 import com.rrv.webservicespringboot.repositories.UsuarioRepository;
+import com.rrv.webservicespringboot.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UsuarioService {
     public Usuario findById(Long codUsuario) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(codUsuario);
 
-        return optionalUsuario.orElse(null);
+        return optionalUsuario.orElseThrow(() -> new ResourceNotFoundException(codUsuario));
     }
 
     public Usuario insert(Usuario usuario) {
