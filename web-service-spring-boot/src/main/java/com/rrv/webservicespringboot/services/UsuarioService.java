@@ -2,8 +2,11 @@ package com.rrv.webservicespringboot.services;
 
 import com.rrv.webservicespringboot.entidades.Usuario;
 import com.rrv.webservicespringboot.repositories.UsuarioRepository;
+import com.rrv.webservicespringboot.services.exceptions.DataBaseException;
 import com.rrv.webservicespringboot.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +32,13 @@ public class UsuarioService {
     }
 
     public void delete(Long codUsuario) {
-        usuarioRepository.deleteById(codUsuario);
+        try {
+            usuarioRepository.deleteById(codUsuario);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(codUsuario);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataBaseException(e.getMessage());
+        }
     }
 
     public Usuario update(Long codUsuario, Usuario usuario) {
