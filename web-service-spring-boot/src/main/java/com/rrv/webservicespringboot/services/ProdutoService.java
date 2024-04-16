@@ -2,6 +2,7 @@ package com.rrv.webservicespringboot.services;
 
 import com.rrv.webservicespringboot.entidades.Produto;
 import com.rrv.webservicespringboot.repositories.ProdutoRepository;
+import com.rrv.webservicespringboot.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,6 @@ public class ProdutoService {
     public Produto findById(Long codProduto) {
         Optional<Produto> optionalProduto = produtoRepository.findById(codProduto);
 
-        return optionalProduto.orElse(null);
+        return optionalProduto.orElseThrow(() -> new ResourceNotFoundException(codProduto));
     }
 }

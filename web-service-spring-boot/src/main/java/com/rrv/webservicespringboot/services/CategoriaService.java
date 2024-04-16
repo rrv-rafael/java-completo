@@ -2,6 +2,7 @@ package com.rrv.webservicespringboot.services;
 
 import com.rrv.webservicespringboot.entidades.Categoria;
 import com.rrv.webservicespringboot.repositories.CategoriaRepository;
+import com.rrv.webservicespringboot.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,6 @@ public class CategoriaService {
     public Categoria findById(Long codCategoria) {
         Optional<Categoria> optionalCategoria = categoriaRepository.findById(codCategoria);
 
-        return optionalCategoria.orElse(null);
+        return optionalCategoria.orElseThrow(() -> new ResourceNotFoundException(codCategoria));
     }
 }
