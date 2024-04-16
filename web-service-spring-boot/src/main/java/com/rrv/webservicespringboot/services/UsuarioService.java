@@ -4,6 +4,7 @@ import com.rrv.webservicespringboot.entidades.Usuario;
 import com.rrv.webservicespringboot.repositories.UsuarioRepository;
 import com.rrv.webservicespringboot.services.exceptions.DataBaseException;
 import com.rrv.webservicespringboot.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -42,10 +43,14 @@ public class UsuarioService {
     }
 
     public Usuario update(Long codUsuario, Usuario usuario) {
-        Usuario entidadeUsuario = usuarioRepository.getReferenceById(codUsuario);
-        updateData(entidadeUsuario, usuario);
+        try {
+            Usuario entidadeUsuario = usuarioRepository.getReferenceById(codUsuario);
+            updateData(entidadeUsuario, usuario);
 
-        return usuarioRepository.save(entidadeUsuario);
+            return usuarioRepository.save(entidadeUsuario);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(codUsuario);
+        }
     }
 
     private void updateData(Usuario entidadeUsuario, Usuario usuario) {
