@@ -1,31 +1,36 @@
 package com.rrv.webservicemongodb.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document
 public class Usuario implements Serializable {
     @Serial
     private static final long serialVersionUID  = 1L;
 
-    private Long codUsuario;
+    @Id
+    private String codUsuario;
     private String nome;
     private String email;
 
     public Usuario() {
     }
 
-    public Usuario(Long codUsuario, String nome, String email) {
+    public Usuario(String codUsuario, String nome, String email) {
         this.codUsuario = codUsuario;
         this.nome = nome;
         this.email = email;
     }
 
-    public Long getCodUsuario() {
+    public String getCodUsuario() {
         return codUsuario;
     }
 
-    public void setCodUsuario(Long codUsuario) {
+    public void setCodUsuario(String codUsuario) {
         this.codUsuario = codUsuario;
     }
 
