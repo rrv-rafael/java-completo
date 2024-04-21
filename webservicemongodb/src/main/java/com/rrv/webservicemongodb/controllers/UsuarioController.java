@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -22,8 +23,8 @@ public class UsuarioController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<UsuarioDTO>> findAll() {
         List<Usuario> usuarios = usuarioService.findAll();
-        List<UsuarioDTO> usuariosDTO = (List<UsuarioDTO>) usuarios.stream().map(usuario -> new UsuarioDTO(usuario));
+        List<UsuarioDTO> usuariosDTO = usuarios.stream().map(UsuarioDTO::new).toList();
 
-        return ResponseEntity.ok().body(usuarios);
+        return ResponseEntity.ok().body(usuariosDTO);
     }
 }
