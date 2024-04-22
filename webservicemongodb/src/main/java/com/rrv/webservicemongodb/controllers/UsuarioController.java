@@ -46,4 +46,10 @@ public class UsuarioController {
 
         return ResponseEntity.created(uri).build();
     }
+
+    @DeleteMapping(value = "/{codUsuario}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable String codUsuario) {
+        usuarioService.deleteById(codUsuario);
+    }
 }

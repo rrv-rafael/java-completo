@@ -27,6 +27,11 @@ public class UsuarioService {
         return usuarioRepository.insert(usuario);
     }
 
+    public void deleteById(String codUsuario) {
+        findById(codUsuario);
+        usuarioRepository.deleteById(codUsuario);
+    }
+
     public Usuario fromDTO(UsuarioDTO usuarioDTO) {
         return new Usuario(usuarioDTO.getCodUsuario(), usuarioDTO.getNome(), usuarioDTO.getEmail());
     }
