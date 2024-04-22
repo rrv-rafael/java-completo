@@ -52,4 +52,12 @@ public class UsuarioController {
     public void deleteById(@PathVariable String codUsuario) {
         usuarioService.deleteById(codUsuario);
     }
+
+    @PutMapping(value = "/{codUsuario}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody UsuarioDTO usuarioDTO, @PathVariable String codUsuario) {
+        Usuario usuario = usuarioService.fromDTO(usuarioDTO);
+        usuario.setCodUsuario(codUsuario);
+        usuarioService.update(usuario);
+    }
 }

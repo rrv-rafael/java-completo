@@ -32,6 +32,21 @@ public class UsuarioService {
         usuarioRepository.deleteById(codUsuario);
     }
 
+    public Usuario update(Usuario usuarioInformado) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioInformado.getCodUsuario());
+
+        if (optionalUsuario.isPresent()) {
+            Usuario usuario = optionalUsuario.get();
+
+            usuario.setNome(usuarioInformado.getNome());
+            usuario.setEmail(usuarioInformado.getEmail());
+
+            return usuarioRepository.save(usuario);
+        }
+
+        throw new ObjectNotFoundException("Usuário não encontrado.");
+    }
+
     public Usuario fromDTO(UsuarioDTO usuarioDTO) {
         return new Usuario(usuarioDTO.getCodUsuario(), usuarioDTO.getNome(), usuarioDTO.getEmail());
     }
