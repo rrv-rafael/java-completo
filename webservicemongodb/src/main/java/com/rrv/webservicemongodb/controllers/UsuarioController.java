@@ -4,9 +4,12 @@ import com.rrv.webservicemongodb.domain.Usuario;
 import com.rrv.webservicemongodb.dto.UsuarioDTO;
 import com.rrv.webservicemongodb.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,5 +34,16 @@ public class UsuarioController {
         Usuario usuario = usuarioService.findById(codUsuario);
 
         return ResponseEntity.ok().body(new UsuarioDTO(usuario));
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> insert(@RequestBody UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioService.fromDTO(usuarioDTO);
+        usuario = usuarioService.insert(usuario);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codUsuario}").buildAndExpand(usuario.getCodUsuario()).toUri();
+
+        return ResponseEntity.created(uri).build();
     }
 }
