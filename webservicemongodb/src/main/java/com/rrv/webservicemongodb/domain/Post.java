@@ -1,12 +1,15 @@
 package com.rrv.webservicemongodb.domain;
 
 import com.rrv.webservicemongodb.dto.AutorDTO;
+import com.rrv.webservicemongodb.dto.ComentarioDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -21,6 +24,7 @@ public class Post implements Serializable {
     private String corpo;
 
     private AutorDTO autor;
+    private List<ComentarioDTO> comentariosDTO = new ArrayList<>();
 
     public Post() {
     }
@@ -71,6 +75,14 @@ public class Post implements Serializable {
 
     public void setAutor(AutorDTO autor) {
         this.autor = autor;
+    }
+
+    public List<ComentarioDTO> getComentariosDTO() {
+        return comentariosDTO;
+    }
+
+    public void setComentariosDTO(List<ComentarioDTO> comentariosDTO) {
+        this.comentariosDTO = comentariosDTO;
     }
 
     @Override
