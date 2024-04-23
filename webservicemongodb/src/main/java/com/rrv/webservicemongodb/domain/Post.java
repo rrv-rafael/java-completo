@@ -1,11 +1,11 @@
 package com.rrv.webservicemongodb.domain;
 
+import com.rrv.webservicemongodb.dto.AutorDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -20,12 +20,12 @@ public class Post implements Serializable {
     private String titulo;
     private String corpo;
 
-    private Usuario autor;
+    private AutorDTO autor;
 
     public Post() {
     }
 
-    public Post(String codPost, LocalDate data, String titulo, String corpo, Usuario autor) {
+    public Post(String codPost, LocalDate data, String titulo, String corpo, AutorDTO autor) {
         this.codPost = codPost;
         this.data = data;
         this.titulo = titulo;
@@ -65,11 +65,11 @@ public class Post implements Serializable {
         this.corpo = corpo;
     }
 
-    public Usuario getAutor() {
+    public AutorDTO getAutor() {
         return autor;
     }
 
-    public void setAutor(Usuario autor) {
+    public void setAutor(AutorDTO autor) {
         this.autor = autor;
     }
 
