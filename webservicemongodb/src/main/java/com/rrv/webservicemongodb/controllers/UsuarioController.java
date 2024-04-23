@@ -1,5 +1,6 @@
 package com.rrv.webservicemongodb.controllers;
 
+import com.rrv.webservicemongodb.domain.Post;
 import com.rrv.webservicemongodb.domain.Usuario;
 import com.rrv.webservicemongodb.dto.UsuarioDTO;
 import com.rrv.webservicemongodb.services.UsuarioService;
@@ -59,5 +60,12 @@ public class UsuarioController {
         Usuario usuario = usuarioService.fromDTO(usuarioDTO);
         usuario.setCodUsuario(codUsuario);
         usuarioService.update(usuario);
+    }
+
+    @GetMapping(value = "/{codUsuario}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String codUsuario) {
+        Usuario usuario = usuarioService.findById(codUsuario);
+
+        return ResponseEntity.ok().body(usuario.getPosts());
     }
 }
