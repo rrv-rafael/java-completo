@@ -19,7 +19,7 @@ public class Post implements Serializable {
 
     @Id
     private String codPost;
-    private LocalDate data;
+    private LocalDate dataPost;
     private String titulo;
     private String corpo;
 
@@ -29,9 +29,9 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(String codPost, LocalDate data, String titulo, String corpo, AutorDTO autor) {
+    public Post(String codPost, LocalDate dataPost, String titulo, String corpo, AutorDTO autor) {
         this.codPost = codPost;
-        this.data = data;
+        this.dataPost = dataPost;
         this.titulo = titulo;
         this.corpo = corpo;
         this.autor = autor;
@@ -45,12 +45,12 @@ public class Post implements Serializable {
         this.codPost = codPost;
     }
 
-    public LocalDate getData() {
-        return data;
+    public LocalDate getDataPost() {
+        return dataPost;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setdataPost(LocalDate dataPost) {
+        this.dataPost = dataPost;
     }
 
     public String getTitulo() {

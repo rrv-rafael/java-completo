@@ -35,8 +35,8 @@ public class Instantiation implements CommandLineRunner {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        Post post1 = new Post(null, LocalDate.parse("21/03/2018", dateTimeFormatter), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AutorDTO(maria));
-        Post post2 = new Post(null, LocalDate.parse("23/03/2018", dateTimeFormatter), "Bom dia", "Acordei feliz hoje!", new AutorDTO(maria));
+        Post post1 = new Post(null, LocalDate.parse("20/03/2018", dateTimeFormatter), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AutorDTO(maria));
+        Post post2 = new Post(null, LocalDate.parse("22/03/2018", dateTimeFormatter), "Bom dia", "Acordei feliz hoje!", new AutorDTO(maria));
 
         ComentarioDTO comentarioDTO1 = new ComentarioDTO("Boa viagem mano!", LocalDate.parse("21/03/2018", dateTimeFormatter), new AutorDTO(alex));
         ComentarioDTO comentarioDTO2 = new ComentarioDTO("Aproveite", LocalDate.parse("22/03/2018", dateTimeFormatter), new AutorDTO(bob));

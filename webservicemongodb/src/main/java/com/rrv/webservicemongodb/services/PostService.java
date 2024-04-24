@@ -6,6 +6,9 @@ import com.rrv.webservicemongodb.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -19,5 +22,12 @@ public class PostService {
 
     public List<Post> findByTitulo(String texto) {
         return postRepository.findByTitulo(texto);
+    }
+
+    public List<Post> fullSearch(String texto, LocalDate dataMin, LocalDate dataMax) {
+        LocalDateTime midnight = dataMax.atTime(LocalTime.MAX);
+        dataMax = midnight.toLocalDate();
+
+        return postRepository.fullSearch(texto, dataMin, dataMax);
     }
 }
